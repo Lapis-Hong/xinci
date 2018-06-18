@@ -1,0 +1,20 @@
+*.egg-info
+data/
+*.pyc
+*.so
+*.tar.gz
+*.DS_Store
+*.bin
+*.vec
+
+build/
+data/
+result/
+dist/
+
+# Intellij
+.idea/
+
+# pip
+.eggs/
+
