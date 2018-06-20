@@ -14,7 +14,7 @@ from xinci.selector import CnTextSelector
 if __name__ == '__main__':
     # unittest.main()
     from xinci.utils import data_reader
-    document = data_reader('../xinci/test.txt', cn_only=True)
+    document = data_reader('../test.txt', cn_only=True)
     selector = CnTextSelector(document)
     generator = selector.generate()
 

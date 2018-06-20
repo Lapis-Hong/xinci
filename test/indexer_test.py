@@ -16,7 +16,7 @@ if __name__ == '__main__':
     # unittest.main()
     from xinci.utils import data_reader
 
-    document = data_reader('../xinci/test.txt', cn_only=True)
+    document = data_reader('../test.txt', cn_only=True)
     indexer = CnTextIndexer(document)
     print(indexer._char_pos_map)
     print(indexer.count('食物'))

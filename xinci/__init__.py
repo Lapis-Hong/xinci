@@ -10,7 +10,7 @@ from .dictionary import Dictionary
 from .word_extraction import extract
 
 
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 
 __all__ = [Dictionary, extract]
 

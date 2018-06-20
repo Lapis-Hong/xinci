@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="xinci",
-      version="1.1.0",
+      version="1.2.0",
       description="Chinese words extraction and new words discovery",
       long_description=open("README.md", "r").read(),
       long_description_content_type="text/markdown",

@@ -25,6 +25,6 @@ for w in xc:
     print(w)
 
 # extract all words, c is a set
-c = xinci.extract('../xinci/test.txt', all_words=True)
+c = xinci.extract('test.txt', all_words=True)
 for w in xc:
     print(w)
