@@ -5,11 +5,12 @@
 """This module contains common word dictionary."""
 from __future__ import unicode_literals
 
+import os
 import codecs
-import logging
 from utils import data_reader
+import logging
 
-logger = logging.getLogger(__name__)
+COMMON_DIC_PATH = os.path.dirname(__file__) + '/common.dic'
 
 
 class Dictionary:
@@ -39,8 +40,14 @@ class Dictionary:
     # remove words from user dic file
     >>> dic.remove_from_file('user.dic')
     """
-    def __init__(self, common_dic_path='common.dic'):
-        self._common_dic_path = common_dic_path
+    def __init__(self, common_dic_path=None):
+        if common_dic_path:
+            self._common_dic_path = common_dic_path
+            logging.info("Using user common words dic `{}`".format(self._common_dic_path))
+        else:
+            self._common_dic_path = COMMON_DIC_PATH
+            logging.info("Using default common words dic `{}`".format(self._common_dic_path))
+
         self.dictionary = set()
         self._init()
 
@@ -51,7 +58,7 @@ class Dictionary:
         for word in vocab:
             if word:
                 self.dictionary.add(word)
-        logger.info("Initialized `{}` common words from file `{}`".format(len(vocab), self._common_dic_path))
+        logging.info("Initialized `{}` common words from file `{}`".format(len(vocab), self._common_dic_path))
         # s = ''
         # for c in text:
         #     if c == '\n' or c == '\r' or c == '\r\n':
@@ -88,8 +95,8 @@ class Dictionary:
             for word in vocab:
                 if word not in self.dictionary:
                     self.dictionary.add(word)
-                    fo.write(word+'\n')
-                    logger.info("Add word `{}` to file `{}`.".format(word, self._common_dic_path))
+                    fo.write('\n'+word)
+                    logging.info("Add word `{}` to file `{}`.".format(word, self._common_dic_path))
 
     def add_from_file(self, vocab_file):
         """Add words to common dic by vocab file.
@@ -102,8 +109,8 @@ class Dictionary:
             for word in vocab:
                 if word not in self.dictionary:
                     self.dictionary.add(word)
-                    fo.write(word+'\n')
-                    logger.info("Add word `{}` to file `{}`.".format(word, self._common_dic_path))
+                    fo.write('\n'+word)
+                    logging.info("Add word `{}` to file `{}`.".format(word, self._common_dic_path))
 
     def remove(self, vocab):
         """Remove words from common dic by iterable object.
@@ -113,8 +120,8 @@ class Dictionary:
         for word in vocab:
             if word in self.dictionary:
                 self.dictionary.remove(word)
-                logger.info("Remove word `{}` to file `{}`.".format(word, self._common_dic_path))
-        with codecs.open(self._common_dic_path, 'w') as fo:
+                logging.info("Remove word `{}` to file `{}`.".format(word, self._common_dic_path))
+        with codecs.open(self._common_dic_path, 'w', encoding='utf-8') as fo:
             for word in self.dictionary:
                 fo.write(word + '\n')
 
@@ -128,7 +135,7 @@ class Dictionary:
         for word in vocab:
             if word in self.dictionary:
                 self.dictionary.remove(word)
-                logger.info("Remove word `{}` to file `{}`.".format(word, self._common_dic_path))
+                logging.info("Remove word `{}` to file `{}`.".format(word, self._common_dic_path))
         with codecs.open(self._common_dic_path, 'w') as fo:
             for word in self.dictionary:
                 fo.write(word + '\n')

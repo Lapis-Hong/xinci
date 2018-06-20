@@ -4,12 +4,15 @@
 # @Date  : 2018/6/17
 """This module contains some utility functions and classes."""
 from __future__ import unicode_literals
+
 import codecs
 import re
+import logging
 
 import argparse
-
 from six.moves import xrange
+
+ch = logging.StreamHandler()
 
 # import sys
 # reload(sys)
@@ -70,17 +73,28 @@ class TextUtils:
 
 def get_opt():
     parser = argparse.ArgumentParser(description='Xinci.')
-
-    parser.add_argument('--corpus_file', type=str, default=None, help='Input corpus file path to xinci.')
-    parser.add_argument('--common_words_file', type=str, default=None, help='Common words file path. None to default path.')
+    parser.add_argument('-f', '--corpus_file', type=str, help='Required, input corpus file path to xinci.')
+    parser.add_argument('-d', '--common_words_file', type=str, help='Optional, common words file path. ')
     parser.add_argument('--min_candidate_len', type=int, default=2, help='Candidate word min length.')
     parser.add_argument('--max_candidate_len', type=int, default=5, help='Candidate word max length.')
     parser.add_argument('--least_cnt_threshold', type=int, default=5, help='Least word count.')
     parser.add_argument('--solid_rate_threshold', type=float, default=0.018, help='Solid rate threshold.')
     parser.add_argument('--entropy_threshold', type=float, default=1.92, help='Entropy.')
-    parser.add_argument('--save_file', type=str, default=None, help='New words output path.')
-    parser.add_argument('--new_words', type=bool, default=True,
-                        help='Set True to extract only new words; set Fasle to extract all words.')
-    parser.add_argument('--verbose', type=bool, default=False, help='Set True to Verbose.')
-    flags, unparsed = parser.parse_known_args()
-    return flags
+    parser.add_argument('-o', '--save_file', type=str, help='New words output path.')
+    parser.add_argument('-a', '--all_words', action='store_true', help='Set to extract all words.')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Verbose.')  # if -v, means True
+    args, unparsed = parser.parse_known_args()
+    if args.verbose:
+        print "verbosity turned on"
+    return args
+
+
+def get_logger():
+    """Return a logger instance. """
+    logger = logging.getLogger("xinci")
+    # logging.basicConfig(format="%(asctime)s-%(name)s-%(levelname)s: %(message)s", level=logging.INFO)  # root logger
+    formatter = logging.Formatter("%(asctime)s-%(name)s-%(levelname)s: %(message)s")
+    ch.setLevel(logging.INFO)
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+    return logger

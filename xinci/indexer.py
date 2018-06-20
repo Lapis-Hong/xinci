@@ -6,10 +6,9 @@
 from __future__ import unicode_literals
 
 import logging
+
 from collections import defaultdict
 from utils import TextUtils
-
-logger = logging.getLogger(__name__)
 
 
 class CnTextIndexer:
@@ -26,7 +25,7 @@ class CnTextIndexer:
         for ix, char in enumerate(self._document):
             self._char_pos_map[char].append(ix)
             self._char_cnt_map[char] += 1
-        logger.info("Initialized char position mapping and char count mapping in document.")
+        logging.info("Initialized char position mapping and char count mapping in document.")
 
     def count(self, target):
         """Target text count in document"""

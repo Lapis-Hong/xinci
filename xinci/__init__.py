@@ -2,19 +2,24 @@
 # coding: utf-8
 # @Author: lapis-hong
 # @Date  : 2018/6/18
-"""This package contains interfaces and functionality. """
-from __future__ import absolute_import
+"""This package contains interfaces and functionality to xinci. """
+# from __future__ import absolute_import
 from __future__ import unicode_literals
-import logging
+
+from .dictionary import Dictionary
+from .word_extraction import extract
 
 
-from xinci.dictionary import Dictionary
-from xinci.word_extraction import WordExtract
+__version__ = '1.1.0'
+
+__all__ = [Dictionary, extract]
 
 
-__version__ = '1.0'
+# if len(logger.handlers) == 0:  # To ensure reload() doesn't add another one
+#     logger.addHandler(logging.NullHandler())
 
-__all__ = []
 
 
-logger = logging.getLogger('xinci')
+
+
+

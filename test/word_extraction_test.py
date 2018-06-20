@@ -9,7 +9,7 @@ import cProfile
 from xinci.word_extraction import WordExtract
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)  # 设置日志级别
+    logging.basicConfig(level=logging.INFO)
     new_word_finder = WordExtract('../xinci/test.txt', '../xinci/common.dic')
     new_word_finder.extract('../result.txt')
-    # cProfile.run('new_word_finder.extract()')
+    cProfile.run('new_word_finder.extract()')
