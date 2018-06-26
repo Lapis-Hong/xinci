@@ -1,6 +1,7 @@
 # xinci 新词 & 抽词
-xinci is a Python interface for chinese words extraction & new words extraction.
+**xinci** is a Python interface for chinese words extraction & new words extraction.
 [https://pypi.org/project/xinci/]
+c++ version see [fast-xinci](https://github.com/Lapis-Hong/fast-xinci)
 
 ## Requirements
 Python >= 2.7
@@ -12,7 +13,7 @@ pip install xinci
 ```
 ### 2. using setup.py
 ``` shell
-git clone git@github.com:Lapis-Hong/xinci.git  
+git clone https://github.com/Lapis-Hong/xinci.git 
 cd xinci 
 pip setup.py install
 ```
